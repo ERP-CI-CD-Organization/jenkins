@@ -17,6 +17,11 @@ RUN /usr/local/bin/install-plugins.sh workflow-aggregator && \
 
 # install   Docker, AWS  ； install docker may take couple of hours ，even a day base on Internet condition
 # if you dont wait that long ,welcome to skip it 
+
+# modify apk source
+#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories  
+
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories   
 RUN apk add --no-cache docker \
     gettext
    
