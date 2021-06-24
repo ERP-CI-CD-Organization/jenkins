@@ -6,7 +6,7 @@ metadata:
   namespace: default
 ---
 kind: Role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: jenkins
   namespace: default
@@ -31,7 +31,7 @@ rules:
   verbs: ["create","delete","get","list","patch","update","watch"]
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: jenkins
@@ -86,7 +86,7 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: erpjenkins:latest
+          image: 839928622/jenkins:latest
           env:
             - name: JAVA_OPTS
               value: -Djenkins.install.runSetupWizard=false
@@ -100,7 +100,7 @@ spec:
               mountPath: /var/jenkins_home
             - name: docker-sock-volume
               mountPath: "/var/run/docker.sock"
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
       volumes:
         # This allows jenkins to use the docker daemon on the host, for running builds
         # see https://stackoverflow.com/questions/27879713/is-it-ok-to-run-docker-from-inside-docker
